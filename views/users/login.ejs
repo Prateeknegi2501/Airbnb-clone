@@ -1,0 +1,114 @@
+<style>
+    /* Main container for login */
+.login {
+    display: inline-block;
+        margin-top: 4rem;
+        margin-bottom: 6rem;
+        align-items: center;
+        padding: 3rem 4rem;
+        border-radius: 2rem;
+        box-shadow: 1px 1px 20px 2px rgba(89, 89, 89, 0.5);
+        
+}
+
+/* Heading Styling */
+h3 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Form Field Styling */
+.username, .password {
+    width: 100%;
+    padding: 0.8rem 1rem; /* Padding for input fields */
+    margin-bottom: 1rem; /* Space between fields */
+    font-size: 1rem;
+   
+}
+
+/* Button Styling */
+.btnLogin {
+    background-color: #fe424d;
+    color: #fff;
+    margin-left: 40%;
+}
+
+.btnLogin:hover {
+    text-align: center;
+    box-shadow: 1px 1px 20px 1px rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login {
+        padding: 1.5rem; /* Reduce padding for smaller devices */
+    }
+
+    h3 {
+        font-size: 24px; /* Adjust heading size */
+    }
+
+    .username, .password {
+        font-size: 0.9rem; /* Adjust input font size */
+    }
+
+    .btnLogin {
+        font-size: 1rem; /* Adjust button font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .login {
+        padding: 1.2rem; /* Further reduce padding for very small screens */
+    }
+
+    h3 {
+        font-size: 20px; /* Adjust heading size */
+    }
+
+    .username, .password {
+        font-size: 0.85rem; /* Smaller font size for inputs */
+    }
+
+    .btnLogin {
+        font-size: 0.95rem; /* Smaller font size for button */
+    }
+}
+
+</style>
+
+<% layout("/layouts/boilerplate")%>
+<div class="  row mt-3">
+    <div class="login col-5 offset-3 ">
+        <h3>Wanderlust Login</h3>
+        <form method="post" action="/login" class="needs-validation" novalidate>
+            <div class="mb-3 username">
+            <label for="username" class="form-label " >Username</label>
+            <input 
+            name="username" 
+            id="username"
+            type="text" 
+            class="form-control" 
+            required
+            >
+            <div class="valid-feedback">Looks good</div>
+            </div>
+            
+            <div class="mb-3 username">
+            <label for="password" class="form-label " >Password</label>
+            <input 
+            name="password" 
+            id="password"
+            type="password" 
+            class="form-control password" 
+            required
+            >
+            <div class="valid-feedback">Looks good</div>
+            </div>
+            <button class="btn  btnLogin">Log in</button>
+        </form>
+    </div>
+</div> 

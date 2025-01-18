@@ -1,0 +1,131 @@
+body{
+    background-color: rgb(175, 240, 175);
+    font-family: "Plus Jakarta Sans", serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+  flex: 1;
+}
+ .navbar{
+    height: 5rem;
+    background-color: white;
+ }
+ .fa-compass{
+    color:#fe424d;
+    font-size: 2rem;
+ }
+ .nav-link{
+    color:#222222 !important;
+ }
+
+  /* footer */
+ .f-info{
+   text-align: center;
+   padding: 1rem;
+   background-color: rgb(232, 231, 231);
+ }
+ .f-info a{
+   text-decoration: none;
+   color:#222222;
+   
+ }
+ .social{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   height: 2.5rem;
+   color:#222222;
+   
+ }
+ .social i{
+   margin-left: 1rem;
+   font-size: 1.25rem;
+   
+ }
+ .global{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   
+ }
+ .global p{
+   margin-top: 0.75rem;
+   margin-left: 0.5rem;
+   font-weight: 600;
+ }
+ .lang,.curr{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   padding: .5rem;
+ }
+.terms a{
+   padding: 0.5rem;
+}
+/* Cards */
+.listingCard{
+  border:none !important;
+  margin-bottom: 2rem;
+}
+.card body{
+  padding: 0 !important;
+}
+.card-text p{
+  font-weight: 400 !important;
+}
+.card-img-top{
+  border-radius: 1rem ! important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+.listing-list{
+  text-decoration: none;
+}
+/* card effect */
+.card-img-overlay{
+  opacity: 0;
+}
+.card-img-overlay:hover{
+  opacity: 0.25;
+  background-color: white;
+}
+/* new ejs */
+ .add-btn{
+  background-color:#fe424d !important;
+  border: none !important;
+ }
+ /* Show ejs */
+ .show-img{
+  height: 40vh;
+  width:50vh;
+ }
+ .btns{
+  display: flex;
+  text-align: center;
+ }
+.show-card{
+  padding-left: 0;
+  padding-right: 0;
+}
+ .btn-edit{
+  background-color:#fe424d !important;
+  border: none !important;
+ }
+ .btn-delete{
+  border: none !important;
+
+ }
+ #rating{
+  text-align: center;
+ }
+ /* map */
+ #map { 
+  height: 400px; 
+  width:80vh;
+}
