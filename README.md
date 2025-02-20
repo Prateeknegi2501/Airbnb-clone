@@ -21,4 +21,4 @@ This project is a full-stack web application designed to perform basic **CRUD op
 - **Authentication**: JWT (JSON Web Tokens).
 
 # Here is the demo link of the project 
-https://wanderlust-yfjn.onrender.com/listings
+https://airbnb-clone-wanderlust-e1rs.onrender.com/listings
