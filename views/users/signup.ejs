@@ -1,0 +1,59 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-6 col-sm-8 col-10">
+        <br />
+        <h3 class="text-center">Register Your Account</h3>
+        <br />
+        <form
+          action="/register"
+          method="post"
+          novalidate
+          class="needs-validation form-border"
+        >
+          <div class="mb-3">
+            <label for="Username" class="form-label">Username</label>
+            <input
+              id="Username"
+              class="form-control"
+              type="text"
+              name="username"
+              required
+            />
+            <div class="invalid-feedback">Please enter a Username.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              name="email"
+              required
+            />
+            <div class="invalid-feedback">Please enter a valid email.</div>
+
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              name="password"
+              required
+            />
+            <div class="invalid-feedback">Please enter a valid password.</div>
+          </div>
+          <br>
+          <div class="d-flex justify-content-center text-center">
+            <button class="btn btn-success ">Sign Up</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
