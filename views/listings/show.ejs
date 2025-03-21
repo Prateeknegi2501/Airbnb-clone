@@ -18,26 +18,31 @@
               <br />
               <%= listing.location%> , <%=listing.country%>
             </p>
+            <p>Owned by:<i><%=listing.owner.username%></i></p>
           </div>
         </div>
+        <%if(currentUser && currentUser._id.equals(listing.owner._id)){%>
         <div class="showbtns">
-          <a
+          <a 
             class="btn btn-dark edit-btn"
             href="/listings/<%=listing._id%>/edit"
             >Edit
           </a>
           <form
             method="post"
-            action="/listings/<%=listing._id%>/delete?_method=DELETE"
+            action="/listings/<%=listing._id%>?_method=DELETE"
           >
             <button class="btn btn-dark">Delete</button>
           </form>
         </div>
+        <%}%> 
 
         <br />
       </div>
-      <hr />
     </div>
+
+    <%if(currentUser){%>
+    <hr />
     <div
       class="col-lg-8 col-md-8 col-sm-10 col-12 offset-lg-3 offset-md-2 offset-sm-1 mb-3"
     >
@@ -81,6 +86,8 @@
       </form>
       <br />
     </div>
+    <%}%>
+
     <hr />
     <br />
     <div
@@ -93,11 +100,11 @@
         <% for(review of listing.reviews){%>
         <div class="card col-5 ms-4 mb-3 flex flex-wrap">
           <div class="card-body">
-            <h5 class="card-title">User</h5>
-            <p class="card-text"><%=review.comment%></p>
+            <h5 class="card-title">@<%=review.author.username%></h5>
+            <p class="card-text"><i><%=review.comment%></i></p>
             <p class="card-text"><%=review.rating%> stars</p>
 
-            <div class="flex flex-wrap ">
+            <div class="flex flex-wrap">
               <form
                 action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE "
                 method="post"
@@ -105,7 +112,6 @@
               >
                 <button class="btn btn-dark btn-sm">Delete</button>
               </form>
-              
             </div>
           </div>
         </div>

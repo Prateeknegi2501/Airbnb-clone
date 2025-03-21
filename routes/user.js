@@ -60,6 +60,7 @@ router.get("/logout", (req, res) => {
     req.flash("success", "Logged out Successfully");
     res.redirect("/listings");
   });
+  next();
 });
 
 module.exports = router;
