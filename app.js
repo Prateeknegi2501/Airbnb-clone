@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -6,6 +10,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const MongoStore=require("connect-mongo")
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStratagy = require("passport-local");
@@ -15,14 +20,14 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/hotel";
+const DB_URL = process.env.MONGO_URL;
 
 main()
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.log("Error occurred:", err));
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(DB_URL);
 }
 
 app.set("view engine", "ejs");
@@ -33,7 +38,20 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 app.engine("ejs", ejsMate);
 
+const store = MongoStore.create({
+  mongoUrl: DB_URL,
+  crypto: {
+    secret: "supersecretstring",
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error",(error)=>{
+  console.log("error in mongo session store",error);
+  
+})
 const sessionOptions = {
+  store,
   secret: "mysupersecretcode",
   saveUninitialized: true,
   resave: false,
@@ -44,7 +62,8 @@ const sessionOptions = {
   },
 };
 
-app.get("/", (req, res) => res.send("Hi i am root"));
+
+app.get("/", (req, res) => res.redirect("/listings"));
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -59,8 +78,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
-  res.locals.failure = req.flash("failure"); 
-  res.locals.currentUser=req.user
+  res.locals.failure = req.flash("failure");
+  res.locals.currentUser = req.user;
   next();
 });
 

@@ -11,6 +11,7 @@
           method="post"
           novalidate
           class="needs-validation"
+          enctype="multipart/form-data"
         >
           <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -25,6 +26,42 @@
             <div class="invalid-feedback">Please enter a title.</div>
           </div>
           <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <div class="dropdown">
+              <button
+                class="btn btn-light dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                id="categoryButton"
+              >
+                Select Category
+              </button>
+              <ul class="dropdown-menu">
+                <% const categories = [ "Trending", "Rooms", "Island", "Domes",
+                "Lakes", "Camping", "Arctic", "Boats", "New", "Play" ];
+                categories.forEach(category => { %>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="setCategory('<%= category %>')"
+                  >
+                    <%= category %>
+                  </a>
+                </li>
+                <% }); %>
+              </ul>
+            </div>
+            <input
+              type="hidden"
+              id="categoryInput"
+              name="listing[category]"
+              required
+            />
+            <div class="invalid-feedback">Please select a category.</div>
+          </div>
+          <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea
               id="description"
@@ -34,18 +71,15 @@
               required
             ></textarea>
             <div class="invalid-feedback">Please enter description.</div>
-
           </div>
           <div class="mb-3">
             <label for="image" class="form-label">Image</label>
             <input
-              type="string"
+              type="file"
               id="image"
               class="form-control"
-              placeholder="Enter image"
               name="listing[image]"
             />
-            
           </div>
           <div class="mb-3">
             <label for="price" class="form-label">Price</label>
@@ -58,8 +92,8 @@
               required
             />
             <div class="invalid-feedback">Please enter price.</div>
-
           </div>
+
           <div class="row wrap">
             <div class="mb-3 col-6">
               <label for="location" class="form-label">Location</label>
@@ -71,8 +105,7 @@
                 name="listing[location]"
                 required
               />
-            <div class="invalid-feedback">Please enter location.</div>
-
+              <div class="invalid-feedback">Please enter location.</div>
             </div>
             <div class="mb-3 col-6">
               <label for="country" class="form-label">Country</label>
@@ -84,8 +117,7 @@
                 name="listing[country]"
                 required
               />
-            <div class="invalid-feedback">Please enter country.</div>
-
+              <div class="invalid-feedback">Please enter country.</div>
             </div>
             <br /><br />
           </div>
@@ -95,4 +127,19 @@
       </div>
     </div>
   </div>
+  <script>
+    function setCategory(category) {
+      document.getElementById("categoryButton").textContent = category;
+      document.getElementById("categoryInput").value = category;
+    }
+
+    // Ensure category is set before form submission
+    document.querySelector("form").addEventListener("submit", function (event) {
+      const categoryValue = document.getElementById("categoryInput").value;
+      if (!categoryValue) {
+        event.preventDefault(); // Prevent form submission
+        alert("Please select a category before submitting.");
+      }
+    });
+  </script>
 </body>

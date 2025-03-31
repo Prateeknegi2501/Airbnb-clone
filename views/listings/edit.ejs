@@ -11,6 +11,7 @@
           action="/listings/<%= listing._id %>?_method=PUT"
           novalidate
           class="needs-validation"
+          enctype="multipart/form-data"
         >
           <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -25,6 +26,43 @@
             <div class="invalid-feedback">Please enter a title.</div>
           </div>
           <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <div class="dropdown">
+              <button
+                class="btn btn-light dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                id="categoryButton"
+              >
+                Select Category
+              </button>
+              <ul class="dropdown-menu">
+                <% const categories = [ "Trending", "Rooms", "Island", "Domes",
+                "Lakes", "Camping", "Arctic", "Boats", "New", "Play" ];
+                categories.forEach(category => { %>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="setCategory('<%= category %>')"
+                  >
+                    <%= category %>
+                  </a>
+                </li>
+                <% }); %>
+              </ul>
+            </div>
+            <input
+              type="hidden"
+              id="categoryInput"
+              name="listing[category]"
+              value="<%= listing.category %>"
+              required
+            />
+            <div class="invalid-feedback">Please select a category.</div>
+          </div>
+          <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea
               id="description"
@@ -32,20 +70,25 @@
               class="form-control"
               rows="4"
               required
-            >
-<%= listing.description %></textarea
-            >
+            > <%= listing.description %> </textarea>
+
             <div class="invalid-feedback">Please enter description.</div>
           </div>
           <div class="mb-3">
-            <label for="image" class="form-label">Image URL</label>
+            <p>Original Image</p>
+            <img
+              src="<%=listing.image.url%>"
+              style="width: 15rem; border-radius: 0.3rem"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Upload new Image</label>
             <input
-              type="text"
+              type="file"
               id="image"
               class="form-control"
-              value="<%= listing.image %>"
+              value="<%=listing.image.url %>"
               name="listing[image]"
-              required
             />
           </div>
           <div class="mb-3">
@@ -87,9 +130,24 @@
               <div class="invalid-feedback">Please enter country.</div>
             </div>
           </div>
-          <button class="btn btn-dark add-btn w-20">Update</button>
+          <button class="btn btn-dark add-btn w-20 mb-5">Update</button>
         </form>
       </div>
     </div>
   </div>
+  <script>
+    function setCategory(category) {
+      document.getElementById("categoryButton").textContent = category;
+      document.getElementById("categoryInput").value = category;
+    }
+
+    // Ensure category is set before form submission
+    document.querySelector("form").addEventListener("submit", function (event) {
+      const categoryValue = document.getElementById("categoryInput").value;
+      if (!categoryValue) {
+        event.preventDefault(); // Prevent form submission
+        alert("Please select a category before submitting.");
+      }
+    });
+  </script>
 </body>
